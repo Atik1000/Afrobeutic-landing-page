@@ -22,7 +22,7 @@ export default function HomePage() {
           aria-hidden
         />
         <MaxWidth className="relative">
-          <div className="mx-auto max-w-3xl text-center">
+          <div className="text-center">
             <p className="text-sm font-medium uppercase tracking-widest text-primary">
               Afrobeutic
             </p>
@@ -30,12 +30,12 @@ export default function HomePage() {
               Beauty & wellness,{" "}
               <span className="text-primary">booked in seconds</span>
             </h1>
-            <p className="mt-4 text-lg text-muted-foreground">
+            <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground md:max-w-3xl">
               Search salons and freelancers, compare services, and lock your
               slot — no account required.
             </p>
           </div>
-          <div className="mx-auto mt-12 max-w-4xl">
+          <div className="mt-12 w-full">
             <SearchBar variant="hero" />
           </div>
         </MaxWidth>
