@@ -17,13 +17,8 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { AnalogTimePicker } from "@/components/analog-time-picker";
+import { formatTime12hDisplay } from "@/lib/time-clock";
 import { Separator } from "@/components/ui/separator";
 import { Check, ChevronLeft, ChevronRight, CalendarDays } from "lucide-react";
 
@@ -34,22 +29,6 @@ const STEPS = [
   "Your details",
   "Confirm",
 ] as const;
-
-const SLOTS = [
-  "09:00",
-  "09:30",
-  "10:00",
-  "10:30",
-  "11:00",
-  "11:30",
-  "12:00",
-  "14:00",
-  "14:30",
-  "15:00",
-  "15:30",
-  "16:00",
-  "17:00",
-];
 
 export function BookingStepper({ salon }: { salon: Salon }) {
   const router = useRouter();
@@ -202,22 +181,14 @@ export function BookingStepper({ salon }: { salon: Salon }) {
               </Popover>
             </div>
             <div className="space-y-2">
-              <Label>Time</Label>
-              <Select
-                value={timeSlot ?? ""}
-                onValueChange={(v) => setTimeSlot(v ?? null)}
-              >
-                <SelectTrigger className="h-11 rounded-xl">
-                  <SelectValue placeholder="Select time" />
-                </SelectTrigger>
-                <SelectContent className="rounded-xl">
-                  {SLOTS.map((t) => (
-                    <SelectItem key={t} value={t}>
-                      {t}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <Label htmlFor="book-time">Time</Label>
+              <AnalogTimePicker
+                id="book-time"
+                value={timeSlot}
+                onChange={(v) => setTimeSlot(v)}
+                placeholder="Tap to set time"
+                triggerClassName="h-11"
+              />
             </div>
           </div>
         )}
@@ -275,7 +246,8 @@ export function BookingStepper({ salon }: { salon: Salon }) {
             </p>
             <p>
               <span className="text-muted-foreground">When:</span>{" "}
-              {format(date, "PPP")} at {timeSlot}
+              {format(date, "PPP")} at{" "}
+              {formatTime12hDisplay(timeSlot)}
             </p>
             <Separator />
             <p>

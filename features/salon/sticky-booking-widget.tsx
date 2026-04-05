@@ -7,6 +7,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
+import { AnalogTimePicker } from "@/components/analog-time-picker";
 import {
   Select,
   SelectContent,
@@ -22,15 +23,6 @@ import {
 } from "@/components/ui/popover";
 import { format } from "date-fns";
 import { CalendarDays } from "lucide-react";
-
-const SLOTS = [
-  "09:00",
-  "10:00",
-  "11:00",
-  "14:00",
-  "15:00",
-  "16:00",
-];
 
 export function StickyBookingWidget({ salon }: { salon: Salon }) {
   const router = useRouter();
@@ -119,22 +111,14 @@ export function StickyBookingWidget({ salon }: { salon: Salon }) {
             </Popover>
           </div>
           <div className="space-y-2">
-            <Label>Time</Label>
-            <Select
-              value={timeSlot ?? ""}
-              onValueChange={(v) => setTimeSlot(v ?? null)}
-            >
-              <SelectTrigger className="rounded-xl">
-                <SelectValue placeholder="Time" />
-              </SelectTrigger>
-              <SelectContent className="rounded-xl">
-                {SLOTS.map((t) => (
-                  <SelectItem key={t} value={t}>
-                    {t}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <Label htmlFor="widget-time">Time</Label>
+            <AnalogTimePicker
+              id="widget-time"
+              value={timeSlot}
+              onChange={(v) => setTimeSlot(v)}
+              placeholder="Clock · AM/PM"
+              triggerClassName="h-10"
+            />
           </div>
         </div>
         <Button
