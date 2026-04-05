@@ -16,11 +16,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { ChevronDown, Menu } from "lucide-react";
+import { ArrowRight, ChevronDown, Globe, Menu } from "lucide-react";
 import { useState } from "react";
 
+const navButtonClass = "h-11 gap-2 rounded-full px-5 text-base font-semibold";
+
 export function CustomerNavbar() {
-  const { t } = useLocale();
+  const { locale, setLocale, t } = useLocale();
   const router = useRouter();
   const [open, setOpen] = useState(false);
 
@@ -38,7 +40,7 @@ export function CustomerNavbar() {
         <nav className="hidden items-center gap-1 md:flex">
           <DropdownMenu>
             <DropdownMenuTrigger
-              className={cn(buttonVariants({ variant: "ghost" }), "gap-1")}
+              className={cn(buttonVariants({ variant: "ghost" }), navButtonClass)}
             >
               Services
               <ChevronDown className="size-4 opacity-60" />
@@ -64,7 +66,7 @@ export function CustomerNavbar() {
 
           <DropdownMenu>
             <DropdownMenuTrigger
-              className={cn(buttonVariants({ variant: "ghost" }), "gap-1")}
+              className={cn(buttonVariants({ variant: "ghost" }), navButtonClass)}
             >
               Salon Types
               <ChevronDown className="size-4 opacity-60" />
@@ -84,35 +86,72 @@ export function CustomerNavbar() {
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
-          <Button asChild className="rounded-full shadow-md hover:shadow-xl transition-shadow">
+          <Button
+            asChild
+            className={cn(navButtonClass, "shadow-md transition-shadow hover:shadow-xl")}
+          >
             <Link href="/business">{t("listBusiness")}</Link>
           </Button>
           <DropdownMenu>
             <DropdownMenuTrigger
               aria-label="Menu"
               className={cn(
-                buttonVariants({ variant: "outline", size: "icon" }),
-                "rounded-full",
+                buttonVariants({ variant: "outline" }),
+                navButtonClass,
+                "shadow-sm",
               )}
             >
+              Menu
               <Menu className="size-5" />
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-52 rounded-2xl p-2">
-              <DropdownMenuItem
-                className="rounded-xl"
-                onClick={() => router.push("/login")}
-              >
-                {t("login")}
-              </DropdownMenuItem>
-              <div className="px-2 py-1.5">
-                <LanguageSwitcher variant="menu" />
+            <DropdownMenuContent
+              align="end"
+              className="w-[min(90vw,24rem)] rounded-[28px] border border-border/70 bg-background p-6 shadow-2xl"
+            >
+              <div className="space-y-5">
+                <div className="space-y-4">
+                  <p className="text-2xl font-semibold cursor-pointer tracking-tight text-foreground">
+                    For customers
+                  </p>
+                  <div className="space-y-1">
+                    <DropdownMenuItem
+                      className="rounded-none cursor-pointer px-0 py-2 text-lg font-medium text-primary focus:bg-transparent focus:text-primary"
+                      onClick={() => router.push("/login")}
+                    >
+                      Log in or sign up
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      className="rounded-none cursor-pointer px-0 py-2 text-lg font-medium focus:bg-transparent"
+                      onClick={() => router.push("/support")}
+                    >
+                      Download the app
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      className="rounded-none cursor-pointer px-0 py-2 text-lg font-medium focus:bg-transparent"
+                      onClick={() => router.push("/support")}
+                    >
+                      Help and support
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      className="rounded-none cursor-pointer px-0 py-2 text-lg font-medium focus:bg-transparent"
+                      onClick={() => setLocale(locale === "en" ? "fr" : "en")}
+                    >
+                      <Globe className="size-5 shrink-0" />
+                      <span>{locale === "en" ? "English" : "Français"}</span>
+                    </DropdownMenuItem>
+                  </div>
+                </div>
+
+                <div className="h-px bg-border/70" />
+
+                <DropdownMenuItem
+                  className="rounded-none px-0 cursor-pointer py-2 text-lg font-semibold focus:bg-transparent"
+                  onClick={() => router.push("/business")}
+                >
+                  <span>For businesses</span>
+                  <ArrowRight className="ml-auto size-6" />
+                </DropdownMenuItem>
               </div>
-              <DropdownMenuItem
-                className="rounded-xl"
-                onClick={() => router.push("/business")}
-              >
-                {t("listBusiness")}
-              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
@@ -174,12 +213,12 @@ export function CustomerNavbar() {
                     ))}
                   </div>
                 </div>
-                <Button asChild className="rounded-full">
+                <Button asChild className={navButtonClass}>
                   <Link href="/business" onClick={() => setOpen(false)}>
                     {t("listBusiness")}
                   </Link>
                 </Button>
-                <Button asChild variant="secondary" className="rounded-full">
+                <Button asChild variant="secondary" className={navButtonClass}>
                   <Link href="/login" onClick={() => setOpen(false)}>
                     {t("login")}
                   </Link>

@@ -59,7 +59,7 @@ export function AuthForm() {
                 <Input
                   id="c-email"
                   type="email"
-                  className="rounded-xl"
+                  className="h-12 rounded-lg px-4"
                   {...customerForm.register("email")}
                 />
                 {customerForm.formState.errors.email ? (
@@ -73,7 +73,7 @@ export function AuthForm() {
                 <Input
                   id="c-password"
                   type="password"
-                  className="rounded-xl"
+                  className="h-12 rounded-lg px-4"
                   {...customerForm.register("password")}
                 />
                 {customerForm.formState.errors.password ? (
@@ -84,7 +84,7 @@ export function AuthForm() {
               </div>
               <Button
                 type="submit"
-                className="w-full rounded-full shadow-md hover:shadow-xl transition-shadow"
+                className="h-12 w-full rounded-lg text-base shadow-md transition-shadow hover:shadow-lg"
               >
                 Continue
               </Button>
@@ -97,7 +97,7 @@ export function AuthForm() {
                 <Input
                   id="s-email"
                   type="email"
-                  className="rounded-xl"
+                  className="h-12 rounded-lg px-4"
                   {...salonForm.register("email")}
                 />
                 {salonForm.formState.errors.email ? (
@@ -111,7 +111,7 @@ export function AuthForm() {
                 <Input
                   id="s-password"
                   type="password"
-                  className="rounded-xl"
+                  className="h-12 rounded-lg px-4"
                   {...salonForm.register("password")}
                 />
                 {salonForm.formState.errors.password ? (
@@ -122,7 +122,7 @@ export function AuthForm() {
               </div>
               <Button
                 type="submit"
-                className="w-full rounded-full shadow-md hover:shadow-xl transition-shadow"
+                className="h-12 w-full rounded-lg text-base shadow-md transition-shadow hover:shadow-lg"
               >
                 Salon dashboard
               </Button>

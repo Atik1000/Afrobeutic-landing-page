@@ -19,7 +19,7 @@ export default function LoginPage() {
           sizes="50vw"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
+        <div className="absolute inset-0 from-background/90 via-background/20 to-transparent" />
         <div className="absolute bottom-10 left-10 max-w-md text-balance">
           <p className="font-heading text-3xl font-semibold">
             Your next appointment, one tap away.
